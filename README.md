@@ -1,3 +1,3 @@
 # springboot-jwt
-SpringBoot集成JWT实现token验证
+SpringBoot集成JWT和swagger2实现token超时验证
 
