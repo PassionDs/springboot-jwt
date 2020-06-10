@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author jinbin
- * @date 2018-07-08 22:37
+ * @author di.mao
+ * @version 1.0
+ * Copyright: Copyright (c) 2020
+ * @date 2020/6/10 14:51
  */
 @ResponseBody
 @ControllerAdvice

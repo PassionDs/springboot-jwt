@@ -8,21 +8,25 @@ import com.pjb.springbootjjwt.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author jinbin
- * @date 2018-07-08 20:45
+ * @author di.mao
+ * @version 1.0
+ * Copyright: Copyright (c) 2020
+ * @date 2020/6/10 14:51
  */
 @Api(tags = "用户操作", protocols = "application/json")
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserApi {
-    @Autowired
-    UserService userService;
-    @Autowired
-    TokenService tokenService;
+
+    private final UserService userService;
+
+    private final TokenService tokenService;
 
     /**
      * 登录

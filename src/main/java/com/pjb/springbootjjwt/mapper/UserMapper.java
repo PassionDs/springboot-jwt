@@ -4,8 +4,10 @@ import com.pjb.springbootjjwt.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * @author jinbin
- * @date 2018-07-08 20:44
+ * @author di.mao
+ * @version 1.0
+ * Copyright: Copyright (c) 2020
+ * @date 2020/6/10 14:51
  */
 public interface UserMapper {
     User findByUsername(@Param("username") String username);
