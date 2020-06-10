@@ -5,6 +5,9 @@ import com.pjb.springbootjjwt.annotation.UserLoginToken;
 import com.pjb.springbootjjwt.entity.User;
 import com.pjb.springbootjjwt.service.TokenService;
 import com.pjb.springbootjjwt.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
  * @author jinbin
  * @date 2018-07-08 20:45
  */
+@Api(tags = "用户操作", protocols = "application/json")
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class UserApi {
     @Autowired
     UserService userService;
@@ -28,6 +32,10 @@ public class UserApi {
      * @author di.mao
      * @date 2020/6/10 13:33
      */
+    @ApiOperation(value = "用户登录 # Passion_Ds/2020-06-10#", notes = "用户登录", nickname = "UserApi" +
+            "-login")
+    @ApiImplicitParam(name = "user", value = "用户", type = "body", required = true, dataType =
+            "User")
     @PostMapping("/login")
     public Object login(@RequestBody User user) {
         JSONObject jsonObject = new JSONObject();
@@ -48,6 +56,8 @@ public class UserApi {
         }
     }
 
+    @ApiOperation(value = "验证 # Passion_Ds/2020-06-10#", notes = "验证", nickname = "UserApi" +
+            "-getMessage")
     @UserLoginToken
     @GetMapping("/getMessage")
     public String getMessage() {

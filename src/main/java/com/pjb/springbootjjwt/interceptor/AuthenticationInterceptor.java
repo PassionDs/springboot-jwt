@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.pjb.springbootjjwt.annotation.PassToken;
 import com.pjb.springbootjjwt.annotation.UserLoginToken;
 import com.pjb.springbootjjwt.entity.User;
+import com.pjb.springbootjjwt.exception.CustomException;
 import com.pjb.springbootjjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -51,25 +52,25 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
-                    throw new RuntimeException("无token，请重新登录");
+                    throw new CustomException("无token，请重新登录");
                 }
                 // 获取 token 中的 user id
                 String userId;
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                 } catch (JWTDecodeException j) {
-                    throw new RuntimeException("401");
+                    throw new CustomException("401");
                 }
                 User user = userService.findUserById(userId);
                 if (user == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
+                    throw new CustomException("用户不存在，请重新登录");
                 }
                 // 验证 token
                 JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(user.getPassword())).build();
                 try {
                     jwtVerifier.verify(token);
                 } catch (JWTVerificationException e) {
-                    throw new RuntimeException("401");
+                    throw new CustomException("401");
                 }
                 return true;
             }

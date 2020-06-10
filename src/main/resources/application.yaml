@@ -1,3 +1,13 @@
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    java-version: @java.version@
+    encoding: @project.build.sourceEncoding@
+    environment: ${spring.profiles.active}
+    server-port: ${server.port}
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -9,3 +19,11 @@ mybatis:
 debug: true
 server:
   port: 8888
+## Swagger configuration
+swagger:
+  enabled: true
+  title: ${info.build.name}
+  description: ${info.build.description}
+  version: ${info.build.version}
+  base-package: com.pjb.springbootjjwt.api
+  base-path: /**
