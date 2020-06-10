@@ -27,3 +27,6 @@ swagger:
   version: ${info.build.version}
   base-package: com.pjb.springbootjjwt.api
   base-path: /**
+custom:
+  ## token超时时间（毫秒）
+  expireMillis: 1800000

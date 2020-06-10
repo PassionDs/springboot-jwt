@@ -2,10 +2,21 @@ package com.pjb.springbootjjwt.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.pjb.springbootjjwt.config.CustomProperties;
 import com.pjb.springbootjjwt.entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -13,17 +24,20 @@ import java.util.Date;
  * @date 2018-07-08 21:04
  */
 @Service("TokenService")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TokenService {
 
-    private long expireMillis = 20000;
+    private final CustomProperties customProperties;
 
     public String getToken(User user) {
-        String token = JWT.create()
+        long expireMillis = customProperties.getExpireMillis();
+        ZonedDateTime zonedDateTime =
+                LocalDateTime.now().plus(expireMillis, ChronoUnit.MILLIS).atZone(ZoneId.systemDefault());
+        return JWT.create()
                 // 将 user id 保存到 token 里面
                 .withAudience(user.getId())
-                .withExpiresAt(new Date(System.currentTimeMillis() + expireMillis))
+                .withExpiresAt(Date.from(zonedDateTime.toInstant()))
                 // 以 password 作为 token 的密钥
                 .sign(Algorithm.HMAC256(user.getPassword()));
-        return token;
     }
 }
