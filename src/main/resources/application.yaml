@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.211:3306/test_config?useSSL=false
+    username: test
+    password: test@sxw
+mybatis:
+  config-location: classpath:mybatis.xml
+debug: true
+server:
+  port: 8888
