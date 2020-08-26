@@ -1,10 +1,7 @@
 package com.passion.ds.springboot.jwt.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.passion.ds.springboot.jwt.entity.User;
-import com.passion.ds.springboot.jwt.mapper.UserMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @author di.mao
@@ -12,18 +9,10 @@ import org.springframework.stereotype.Service;
  * Copyright: Copyright (c) 2020
  * @date 2020/6/10 14:51
  */
-@Service("UserService")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UserService {
+public interface UserService extends IService<User> {
 
-    private final UserMapper userMapper;
+    User findByUsername(User user);
 
-    public User findByUsername(User user) {
-        return userMapper.findByUsername(user.getUsername());
-    }
-
-    public User findUserById(String userId) {
-        return userMapper.findUserById(userId);
-    }
+    User findUserById(String userId);
 
 }

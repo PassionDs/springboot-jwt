@@ -10,15 +10,27 @@ info:
     server-port: ${server.port}
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.2.211:3306/test_config?useSSL=false
-    username: test
-    password: test@sxw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useunicode=true&useSSL=false&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
 mybatis:
   config-location: classpath:mybatis.xml
-debug: true
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Logger Config
+logging:
+  level:
+    com.passion.ds.springboot.jwt: debug
+
+#开起这项会输出starter各种信息
+#debug: true
 server:
-  port: 8888
+  port: 8801
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 8192
 ## Swagger configuration
 swagger:
   enabled: true
@@ -30,3 +42,6 @@ swagger:
 custom:
   ## token超时时间（毫秒）
   expireMillis: 1800000
+config:
+  token: false
+

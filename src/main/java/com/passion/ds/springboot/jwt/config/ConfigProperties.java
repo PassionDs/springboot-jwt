@@ -8,15 +8,14 @@ import org.springframework.stereotype.Component;
  * @author di.mao
  * @version 1.0
  * Copyright: Copyright (c) 2020
- * @date 2020/6/10 14:51
+ * @date 2020/8/26 11:38
  */
 @Component
 @Data
-@ConfigurationProperties(prefix = "custom")
-public class CustomProperties {
+@ConfigurationProperties(prefix = "config")
+public class ConfigProperties {
     /**
-     * token超时时间
+     * token是否开启
      */
-    private long expireMillis;
-
+    private Boolean token;
 }

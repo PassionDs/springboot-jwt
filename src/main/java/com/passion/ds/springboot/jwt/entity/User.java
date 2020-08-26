@@ -16,9 +16,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     @ApiModelProperty(value = "主键")
-    String id;
+    Long id;
     @ApiModelProperty(value = "用户名", required = true)
     String username;
     @ApiModelProperty(value = "密码", required = true)
     String password;
+    @ApiModelProperty(value = "手机", required = true)
+    String phone;
+    @ApiModelProperty(value = "角色", required = true)
+    Integer role;
+    @ApiModelProperty(value = "是否锁定", required = true)
+    Integer isLock;
 }

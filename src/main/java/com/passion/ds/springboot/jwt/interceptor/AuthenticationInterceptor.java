@@ -6,11 +6,17 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.passion.ds.springboot.jwt.annotation.PassToken;
+import com.passion.ds.springboot.jwt.config.ConfigProperties;
+import com.passion.ds.springboot.jwt.config.CustomProperties;
 import com.passion.ds.springboot.jwt.entity.User;
 import com.passion.ds.springboot.jwt.exception.CustomException;
 import com.passion.ds.springboot.jwt.service.UserService;
 import com.passion.ds.springboot.jwt.annotation.UserLoginToken;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,12 +33,19 @@ import java.lang.reflect.Method;
  * @date 2020/6/10 14:51
  */
 public class AuthenticationInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    ConfigProperties configProperties;
+
     @Autowired
     UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                              Object object) {
+        if (!configProperties.getToken()) {
+            return true;
+        }
         // 从 http 请求头中取出 token
         String token = httpServletRequest.getHeader("token");
         // 如果不是映射到方法直接通过

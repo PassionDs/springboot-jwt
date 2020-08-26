@@ -33,7 +33,7 @@ public class TokenService {
                 LocalDateTime.now().plus(expireMillis, ChronoUnit.MILLIS).atZone(ZoneId.systemDefault());
         return JWT.create()
                 // 将 user id 保存到 token 里面
-                .withAudience(user.getId())
+                .withAudience(String.valueOf(user.getId()))
                 .withExpiresAt(Date.from(zonedDateTime.toInstant()))
                 // 以 password 作为 token 的密钥
                 .sign(Algorithm.HMAC256(user.getPassword()));
