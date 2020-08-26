@@ -10,8 +10,10 @@ info:
     server-port: ${server.port}
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useunicode=true&useSSL=false&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://localhost:3306/test?useunicode=true&useSSL=false&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test?useunicode=true&useSSL=false&characterEncoding=utf8&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
 mybatis:
