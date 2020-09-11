@@ -2,6 +2,8 @@ package com.passion.ds.springboot.jwt.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.passion.ds.springboot.jwt.annotation.UserLoginToken;
 import com.passion.ds.springboot.jwt.api.UserApi;
 import com.passion.ds.springboot.jwt.config.ConfigProperties;
@@ -87,10 +89,11 @@ public class UserController implements UserApi {
     @UserLoginToken
     @Override
     public Page<User> page(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-        userService.lambdaQuery().eq(User::getIsLock, LockTypeEnum.NOT_LOCKED.getCode()).or().likeRight(User::getUsername,"张").list();
-        userService.lambdaQuery().eq(User::getIsLock, LockTypeEnum.NOT_LOCKED.getCode()).likeRight(User::getUsername,"张").list();
+        userService.findByUsername(User.builder().username("张三1").build());
+        userService.lambdaQuery().eq(User::getIsLock, LockTypeEnum.NOT_LOCKED.getCode()).or().likeRight(User::getUsername, "张").list();
+        userService.lambdaQuery().eq(User::getIsLock, LockTypeEnum.NOT_LOCKED.getCode()).likeRight(User::getUsername, "张").list();
         userService.lambdaQuery().eq(User::getIsLock, LockTypeEnum.NOT_LOCKED.getCode()).list();
-
+        PageInfo<User> info = PageHelper.startPage(page, size).doSelectPageInfo(userService::list);
         return userService.lambdaQuery().page(new Page<>(page, size));
     }
 

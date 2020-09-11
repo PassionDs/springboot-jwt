@@ -85,7 +85,14 @@
             <version>${swagger-spring-boot-starter.version}</version>
         </dependency>
 
-        <!--mybatisplus-->
+        <!--pagehelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.11</version>
+        </dependency>
+
+        <!--mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
