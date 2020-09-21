@@ -10,8 +10,8 @@ import com.passion.ds.springboot.jwt.config.ConfigProperties;
 import com.passion.ds.springboot.jwt.entity.User;
 import com.passion.ds.springboot.jwt.enums.BooleanTypeEnum;
 import com.passion.ds.springboot.jwt.enums.LockTypeEnum;
-import com.passion.ds.springboot.jwt.service.TokenService;
 import com.passion.ds.springboot.jwt.service.UserService;
+import com.passion.ds.springboot.jwt.service.framework.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
 
 /**
  * @author di.mao

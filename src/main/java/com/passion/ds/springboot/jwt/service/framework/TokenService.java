@@ -1,4 +1,4 @@
-package com.passion.ds.springboot.jwt.service;
+package com.passion.ds.springboot.jwt.service.framework;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

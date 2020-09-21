@@ -30,6 +30,8 @@ public class CustomException extends RuntimeException {
      */
     private boolean propertiesKey = true;
 
+    private String message;
+
     /**
      * 构造一个基本异常.
      *
@@ -84,6 +86,11 @@ public class CustomException extends RuntimeException {
         this.setPropertiesKey(propertiesKey);
     }
 
+    public CustomException(String message, Integer errorCode) {
+        this.message = message;
+        this.errorCode = errorCode;
+    }
+
     /**
      * 构造一个基本异常.
      *
@@ -92,6 +99,7 @@ public class CustomException extends RuntimeException {
      */
     public CustomException(String message, Throwable cause) {
         super(message, cause);
+        this.message = message;
     }
 
     public int getErrorCode() {
